@@ -26,7 +26,7 @@ const useData = () => {
             axios.delete(`https://ancient-earth-75371.herokuapp.com/contect/${id}`)
             .then(res =>{
                if(res.data.deletedCount){
-                  navigate('/massage')
+                  navigate('/dashboard/massage')
                   alert("delete successfully")
                }
             })
