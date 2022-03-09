@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import Dashboard from "./component/Dashboard";
+import MessegBody from "./component/MessegBody";
+import Messege from "./component/Messege";
+import Appointment from "./component/Appointment.jsx"
+import AddAdmin from "./component/AddAdmin";
+import ManageUser from "./component/ManageUser";
+import Login from "./component/Login";
+import AuthProvider from "./context/Context";
+import PrivateRoute from "./component/private/PrivateRoute";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <AuthProvider>
+     <BrowserRouter>
+       <Routes>
+         <Route path="/dashboard/*" element={<Dashboard />}>
+            <Route path="massage/*" element={<Messege />}> 
+                 <Route path=":id" element={<MessegBody />} />
+            </Route>
+            <Route path ="apointment" element={<Appointment />} />
+            <Route path="addAdmin" element={<AddAdmin />} />
+            <Route path="manageAdmin" element={<ManageUser />} />
+         </Route>
+         <Route path="/login" element={<Login />} />
+       </Routes>
+     </BrowserRouter>
+     </AuthProvider>
     </div>
   );
 }
